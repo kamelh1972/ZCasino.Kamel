@@ -8,11 +8,16 @@ print("vous etes installer sur la table a roulette avec",somme,"$")
 
 while continuer:
     mise_numero= -1
-    while mise_numero>49 or mise_numero<=0:
+    while mise_numero>49 or mise_numero<0:
         mise_numero=input("Parier sur un nombre (entre 0 et 49) : ")
-        mise_numero=int(mise_numero)
-        if mise_numero<=0 or mise_numero>49:
-            print("Parier sur un nombre entre 0 et 49.")
+        try :
+            mise_numero=int(mise_numero)
+        except ValueError:
+            print("Vous n'avez fait de saisie")
+            mise_numero = -1
+            continue
+        if mise_numero<0 or mise_numero>49:
+            print("Ce nombre n'est pas  entre 0 et 49.")
     mise = 0
     while mise <= 0 or mise > somme:
         mise = input("entrez votre mise:")
@@ -38,7 +43,7 @@ while continuer:
     elif roulette%2 == mise_numero%2:
         print("vous avez parier sur la bonne couleur", mise, "euros")
         mise = ceil(mise*0.5)
-        somme+=mise*1.5
+        somme+=mise
         print("vous avez maintenant", somme, "euros")
     else:
         print("Perdu,vous perdez votre mise")
